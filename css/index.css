@@ -1,0 +1,16 @@
+body {
+    display: flex;
+}
+
+.izquierda {
+    background-image: url(../assets/totalshop-image.png), linear-gradient(to left, #FF7C48, #FF415B);
+    width: 55%;
+}
+
+.derecha {
+    width: 45%;
+}
+
+.formulario-login {
+    margin: 30% 20%;
+}
