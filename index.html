@@ -12,38 +12,139 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="izquierda">
-        <h1>¡Bienvenido!</h1>
-    </div>
-    <div class="derecha">
-        <div class="formulario-login">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-primary">Entrar</h5>
-                </div>
-                <div class="modal-body">
-                    <form id="LoginForm" action="login.php" method="POST">
-                        <div class="form-group">
-                            <label for="nombreUsuario" class="text-dark">Nombre de usuario</label>
-                            <input type="text" name="nombreUsuario" class="form-control" id="nombreUsuario" placeholder="Nombre de usuario" required>
+    <div class="top">
+        <div class="izquierda">
+            <div class="info">
+                <h5>Encuentra el regalo ideal</h5>
+                <img src="assets/switch.png" alt="">
+                <h5>O gana dinero, fácil y rápido</h5>
+                <img src="assets/money-nobg.gif" alt="">
+            </div>
+        </div>
+        <div class="derecha">
+            <h1>¡Bienvenido!</h1>
+            <div class="formulario-login">
+                <div class="modal-content">
+                    <div class="modal-header mb-4">
+                        <h4 class="modal-title">Entrar</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="LoginForm" action="login.php" method="POST">
+                            <div class="form-group mb-4">
+                                <label for="nombreUsuario" class="text-dark">Nombre de usuario</label>
+                                <input type="text" name="nombreUsuario" class="form-control" id="nombreUsuario" placeholder="Nombre de usuario" required>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="contraseña" class="text-dark">Contraseña</label>
+                                <input type="password" name="contraseña" class="form-control" id="contraseña" placeholder="Contraseña" required>
+                                <i id="verIcon" class="bi bi-eye-slash-fill" onclick="verContra()"></i>
+                            </div>
+                            <div class="form-group d-grid mb-5">
+                                <input type="hidden" name="accion" value="login" />
+                                <button type="submit" class="btn btn-block">Entrar</button>
+                            </div>
+                        </form>
+
+                        <h5>¿Eres nuevo?</h5>
+                        <div class="d-grid">
+                            <button type="button" class="btn btn-block" onclick="location.href='#registro'" >Regístrate</button>
                         </div>
-                        <div class="form-group">
-                            <label for="contraseña" class="text-dark">Contraseña</label>
-                            <input type="password" name="contraseña" class="form-control" id="contraseña" placeholder="Contraseña" required>
-                            <i id="verIcon" class="bi bi-eye-slash-fill" onclick="verContra()"></i>
-                        </div>
-                        <div class="form-group">
-                            <input type="hidden" name="accion" value="login" />
-                            <button type="submit" class="btn btn-primary btn-block">Entrar</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <label class="text-body">¿Eres nuevo?</label>
-                    <button type="button" class="btn btn-outline-primary" onclick="sendSessionVars('registro.php')">Registrate</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <div id="registro" class="registro">
+        <h1>Crea una cuenta</h1>
+        <div class="register-form">
+            <form id="registroUsuario" class="row needs-validation" action="php/UsuarioProcesos.php" method="POST" enctype="multipart/form-data" novalidate>
+                <div class="form-group">
+                    <label for="inputNombreUsu">Nombre de usuario</label>
+                    <input type="text" name="nombreUsu" class="form-control" id="inputNombreUsu"
+                        pattern="[A-Za-z0-9À-ÿ\u00f1\u00d1]{3,}" required>
+                    <small id="nombreUHelp" class="form-text text-muted">Mínimo 3 caracteres.</small>
+                    <div class="invalid-feedback">
+                        Elija un nombre de usuario válido.
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail">Email</label>
+                    <input type="email" name="email" class="form-control" id="inputEmail"
+                        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}$" aria-describedby="emailHelp"
+                        placeholder="nombre@ejemplo.com" required>
+                    <div class="invalid-feedback">
+                        Ingrese un correo válido.
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputContraseña">Contraseña</label>
+                    <input type="password" name="contra" class="form-control" id="inputContraseña"
+                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&]).{8,}" required>
+                    <i id="verIconR" class="bi bi-eye-slash-fill" onclick="verContraR()"></i>
+                    <small id="contraseñaHelp" class="form-text text-muted">Mínimo 8 caracteres, una
+                        mayúscula, una minúscula, un número y un caracter especial.</small>
+                    <div class="invalid-feedback">
+                        Ingrese una contraseña válida.
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputNombre">Nombre(s)</label>
+                    <input type="text" name="nombre" class="form-control" id="inputNombre"
+                        pattern="[A-Za-zÀ-ÿ\u00f1\u00d1 ]{3,}" required>
+                    <small id="nombreHelp" class="form-text text-muted">Mínimo 3 caracteres. Solo use letras.</small>
+                    <div class="invalid-feedback">
+                        Ingrese su nombre.
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputApellidos">Apellidos</label>
+                    <input type="text" name="apellido" class="form-control" id="inputApellidos"
+                        pattern="[A-Za-zÀ-ÿ\u00f1\u00d1 ]{3,}" required>
+                    <small id="apellidoHelp" class="form-text text-muted">Mínimo 3 caracteres. Solo use letras.</small>
+                    <div class="invalid-feedback">
+                        Ingrese su apellido.
+                    </div>
+                </div>
+                <div class="form-group col-md-8">
+                    <label for="inputFecha">Fecha de nacimiento</label>
+                    <input type="date" name="fecha" class="form-control" id="inputFecha" required>
+                    <div class="invalid-feedback">
+                        Ingrese su fecha de nacimiento.
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputSexo">Sexo</label>
+                    <select class="form-select" id="inputSexo" required>
+                        <option selected disabled value="">Elige...</option>
+                        <option>Femenino</option>
+                        <option>Masculino</option>
+                      </select>
+                    <div class="invalid-feedback">
+                        Elija una opción.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="customFileLangHTML">Imagen de usuario</label>
+                    <img id="imgPrev" src="assets/stock-user-image.png" alt="">
+                    <div class="custom-file">
+                        <input type="file" name="imagen" class="form-control" id="customFileLangHTML"
+                            accept="image/jpeg, image/png" required>
+                        <div class="invalid-feedback">
+                            Elija una imagen.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" hidden>
+                    <input type="text" name="imagenN" class="form-control" id="inputImagenN">
+                </div>
+                <div class="form-group d-grid">
+                    <input type="hidden" name="idRol" value="">
+                    <input type="hidden" name="accion" value="registrar">
+                    <button class="btn btn-block" type="submit">Registrarse</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="js/index.js"></script>
 </body>
 </html>

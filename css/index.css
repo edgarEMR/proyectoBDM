@@ -1,16 +1,125 @@
 body {
     display: flex;
+    flex-direction: column;
+}
+
+.top {
+    display: flex;
+    flex-direction: row;
 }
 
 .izquierda {
     background-image: url(../assets/totalshop-image.png), linear-gradient(to left, #FF7C48, #FF415B);
+    background-repeat: no-repeat;
+    background-position: -150%;
     width: 55%;
+    height: 753px;
+    color: white;
+}
+
+.info {
+    width: 50%;
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10% 0%;
+}
+
+.info img {
+    width: 55%;
+    padding-top: 3%;
+    margin-bottom: 15%;
 }
 
 .derecha {
     width: 45%;
 }
 
+.derecha h1 {
+    margin-top: 7%;
+    display: flex;
+    justify-content: center;
+    font-size: 55pt;
+}
+
 .formulario-login {
-    margin: 30% 20%;
+    margin: 15% 20%;
+}
+
+.modal-title {
+    color: #FF7C48;
+}
+
+.form-group #verIcon {
+    position: absolute;
+    margin-top: -30px;
+    margin-left: 380px;
+    cursor: pointer;
+}
+
+.form-group button {
+    background-color: #FF415B;
+    color: white;
+}
+
+.form-group button:hover {
+    background-color: white;
+    color: #FF415B;
+    border-color: #FF415B;
+}
+
+.modal-body h5 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5%;
+}
+
+.modal-body > div > button {
+    background-color: white;
+    color: #FF7C48;
+    border-color: #FF7C48;
+}
+
+.modal-body > div > button:hover {
+    background-color: #FF7C48;
+    color: white;
+    border-color: white;
+}
+
+.registro {
+    background-image:  linear-gradient(to right, #FF7C48, #FF415B);
+}
+
+.registro h1{
+    text-align: center;
+    color: white;
+    padding-top: 30px;
+}
+
+.register-form {
+    background-color: white;
+    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,.2);
+    box-shadow: 0px 14px 0 5px rgba(44,44,44,.4);
+    width: 45%;
+    margin: 2% auto;
+    padding: 30px;
+}
+
+#registroUsuario .form-group{
+    margin: 2% 0%;
+}
+
+#registroUsuario .form-group img{
+    display: block;
+    margin: 2% auto;
+    width: 15%;
+}
+
+#registroUsuario .form-group i{
+    position: absolute;
+    margin-top: -30px;
+    margin-left: 260px;
+    cursor: pointer;
 }
