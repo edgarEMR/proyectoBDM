@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TotalShop</title>
+    <link rel="icon" href="assets/totalshop-icon.png">
+    <link rel="stylesheet" href="css/detalleProducto.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+</head>
+
+<body>
+    <div id="navigation" class="top">
+
+    </div>
+    <div class="container mt-5 mb-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="images p-3">
+                                <div class="text-center p-4">
+                                    <img id="main-image" src="assets/smartwatch.webp" width="250" />
+                                </div>
+                                <div class="thumbnail text-center">
+                                    <img onclick="change_image(this)" src="assets/smartwatch.webp" width="70">
+                                    <img onclick="change_image(this)" src="assets/smartwatch-back.webp" width="70">
+                                    <img onclick="change_image(this)" src="assets/smartwatch-yellow.webp" width="70">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="product p-4">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center">
+                                        <span class="ml-1">Electrónica | Smartwatches</span>
+                                    </div>
+                                </div>
+                                <div class="mt-4 mb-3">
+                                    <span class="text-uppercase text-muted brand">Vendido por Luis</span>
+                                    <h5 class="text-uppercase">Smartwatch Lige BW0223</h5>
+                                    <p class="card-text col-6 rating">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                    </p>
+                                    <div class="price d-flex flex-row align-items-center">
+                                        <span class="act-price">$599</span>
+                                    </div>
+                                    <span class="text-uppercase text-muted brand">(10 disponibles)</span>
+                                </div>
+                                <p class="about">Energía que se adapta a tu rutina <br>
+                                    ¡Entrena todos los días! Su batería tiene una duración de hasta 7 días, dependiendo
+                                    de la intensidad del uso. Tendrás energía suficiente para acompañar tus
+                                    entrenamientos diarios y llevarlos a otro nivel</p>
+                                <div class="cart mt-4 align-items-center">
+                                    <a class="btn px-4"><i class="bi bi-cart-plus"></i></a>
+                                    <a href="#" class="btn px-4"><i class="bi bi-list-ul"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row my-4">
+                <div class="col-md-6">
+                    <h5 style="color: #FF7C48;">Comentarios</h5>
+                    <div class="comentarios my-1">
+                        <div class="card my-2">
+                            <div class="card-body">
+                                <p class="card-text">Es muy buen producto, superó mis expectativas.</p>
+                                <p class="card-text col-6">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <div>
+                                    <img src="assets/stock-user-image.png" width="18">
+                                    <span class="text2">Martha</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card my-2">
+                            <div class="card-body">
+                                <p class="card-text">Es muy buen producto, superó mis expectativas.</p>
+                                <p class="card-text col-6">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <div>
+                                    <img src="assets/stock-user-image.png" width="18">
+                                    <span class="text2">Martha</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card my-2">
+                            <div class="card-body">
+                                <p class="card-text">Es muy buen producto, superó mis expectativas.</p>
+                                <p class="card-text col-6">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <div>
+                                    <img src="assets/stock-user-image.png" width="18">
+                                    <span class="text2">Martha</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card my-2">
+                            <div class="card-body">
+                                <p class="card-text">Es muy buen producto, superó mis expectativas.</p>
+                                <p class="card-text col-6">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <div>
+                                    <img src="assets/stock-user-image.png" width="18">
+                                    <span class="text2">Martha</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="boxComentario">
+                        <form class="rounded msg-form">
+                            <div class="form-group">
+                                <textarea name="message" id="msgus" cols="10" rows="3" class="form-control bg-light"
+                                    placeholder="Comenta..."></textarea>
+                            </div>
+                            <div class="row">
+                                <p class="card-text col-6">
+                                    <a href=""><i class="bi bi-star-fill"></i></a>
+                                    <a href=""><i class="bi bi-star-fill"></i></a>
+                                    <a href=""><i class="bi bi-star-fill"></i></a>
+                                    <a href=""><i class="bi bi-star-fill"></i></a>
+                                    <a href=""><i class="bi bi-star-fill"></i></a>
+                                </p>
+                                <div class="form-group d-flex justify-content-end col-6">
+                                    <button type="submit" class="btn text-white mt-1"><i class="bi bi-send"></i></button>
+                                </div>
+                            </div>
+                            
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="recomendados">
+
+
+                        <div class="row">
+                            <h5 class="col-6" style="color: #FF7C48;">Del mismo vendedor</h5>
+                            <div class="col-6 text-end">
+                                <a class="btn mb-3 mr-1" href="#carouselExampleIndicators3" role="button"
+                                    data-bs-slide="prev" style="background-color: #FF415B; color: white;">
+                                    <i class="bi bi-arrow-left"></i>
+                                </a>
+                                <a class="btn mb-3 " href="#carouselExampleIndicators3" role="button"
+                                    data-bs-slide="next" style="background-color: #FF415B; color: white;">
+                                    <i class="bi bi-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div id="carouselExampleIndicators3" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class="row justify-content-center">
+
+                                        <div class="col-md-8 mb-3">
+                                            <div class="card">
+                                                <img class="img-fluid" alt="100%x280" src="assets/xiaomi.webp">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"><a href="#"
+                                                            class="text-reset stretched-link">Xiaomi Redmi 9A</a></h5>
+                                                    <div class="row">
+                                                        <h5 class="col-6" style="color: #FF7C48;">$2,999</h5>
+                                                        <p class="card-text col-6">
+                                                            <i class="bi bi-star-fill"></i>
+                                                            <i class="bi bi-star-fill"></i>
+                                                            <i class="bi bi-star-fill"></i>
+                                                            <i class="bi bi-star-fill"></i>
+                                                            <i class="bi bi-star"></i>
+                                                        </p>
+                                                    </div>
+                                                        
+                                                    <div class="row buttons">
+                                                        <a href="#" class="btn col-6"><i
+                                                                class="bi bi-cart-plus"></i></a>
+                                                        <a href="#" class="btn col-6"><i class="bi bi-list-ul"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="row justify-content-center">
+
+                                        <div class="col-md-8 mb-3">
+                                            <div class="card">
+                                                <img class="img-fluid" alt="100%x280" src="assets/lonchera.webp">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"><a href="#"
+                                                            class="text-reset stretched-link">Lonchera térmica</a></h5>
+                                                    <div class="row">
+                                                        <h5 class="col-6" style="color: #FF7C48;">$2,999</h5>
+                                                        <p class="card-text col-6">
+                                                            <i class="bi bi-star-fill"></i>
+                                                            <i class="bi bi-star-fill"></i>
+                                                            <i class="bi bi-star-fill"></i>
+                                                            <i class="bi bi-star"></i>
+                                                            <i class="bi bi-star"></i>
+                                                        </p>
+                                                    </div>
+                                                    <div class="row buttons">
+                                                        <a href="#" class="btn col-6"><i
+                                                                class="bi bi-cart-plus"></i></a>
+                                                        <a href="#" class="btn col-6"><i class="bi bi-list-ul"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/detalleProducto.js"></script>
+</body>
+
+</html>

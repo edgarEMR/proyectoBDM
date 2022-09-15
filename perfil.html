@@ -137,7 +137,86 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         Mis listas
-                        <button type="button" class="btn btn-light btn-sm"><i class="bi bi-plus-circle"></i></button>
+                        <button type="button" class="btn btn-light btn-sm" data-bs-toggle="modal"
+                            data-bs-target="#nuevaLista"><i class="bi bi-plus-circle"></i></button>
+                        <div class="modal fade" id="nuevaLista">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <div class="modal-title">Nueva lista</div>
+                                    </div>
+
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        <form method="POST">
+                                            <div class="form-group">
+                                                <input class="form-control" type="text" placeholder="Nombre de la lista"
+                                                    name="email">
+                                            </div>
+                                            <div class="form-group">
+                                                <input class="form-control" type="text" placeholder="Descripcion"
+                                                    name="password">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="customFileLangHTML">Imagen</label>
+                                                <div class="custom-file">
+                                                    <input type="file" name="imagen" class="form-control" id="customFileLangHTML"
+                                                        accept="image/jpeg, image/png" required>
+                                                    <div class="invalid-feedback">
+                                                        Elija una imagen.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="p-t-10">
+                                                <button class="btn btn-block" type="submit"
+                                                    data-target="#">Crear</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="editarLista">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <div class="modal-title">Editar lista</div>
+                                    </div>
+
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        <form method="POST">
+                                            <div class="form-group">
+                                                <input class="form-control" type="text" placeholder="Nombre de la lista"
+                                                    name="email">
+                                            </div>
+                                            <div class="form-group">
+                                                <input class="form-control" type="text" placeholder="Descripcion"
+                                                    name="password">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="customFileLangHTML">Imagen</label>
+                                                <div class="custom-file">
+                                                    <input type="file" name="imagen" class="form-control" id="customFileLangHTML"
+                                                        accept="image/jpeg, image/png" required>
+                                                    <div class="invalid-feedback">
+                                                        Elija una imagen.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="p-t-10">
+                                                <button class="btn btn-block" type="submit"
+                                                    data-target="#">Guardar</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="listas">
@@ -152,7 +231,16 @@
                                     </h2>
                                     <div id="flush-collapseOne" class="accordion-collapse collapse"
                                         aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                        <div class="accordion-body">Vacio</div>
+                                        <div class="accordion-body">Lista para regalos de navidad
+                                            <div class="row">
+                                                <a href="#" class="btn col-6" data-bs-toggle="modal"
+                                                data-bs-target="#editarLista" style="background-color: #FF7C48;
+                                                color: white;"><i
+                                                        class="bi bi-pencil-fill"></i></a>
+                                                <a href="#" class="btn btn-danger col-6"><i
+                                                        class="bi bi-trash-fill"></i></a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="accordion-item">
@@ -166,13 +254,16 @@
                                     <div id="flush-collapseTwo" class="accordion-collapse collapse"
                                         aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
                                         <div class="accordion-body">
+                                            <p>Esta es mi wishlist</p>
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
                                                     <div class="card">
-                                                        <img class="img-fluid" alt="100%x280" src="assets/lonchera.webp">
+                                                        <img class="img-fluid" alt="100%x280"
+                                                            src="assets/lonchera.webp">
                                                         <div class="card-body">
                                                             <h5 class="card-title"><a href="#"
-                                                                    class="text-reset stretched-link">Lonchera térmica</a></h5>
+                                                                    class="text-reset stretched-link">Lonchera
+                                                                    térmica</a></h5>
                                                             <div class="row my-4">
                                                                 <h5 class="col-6" style="color: #FF7C48;">$299</h5>
                                                                 <p class="card-text col-6">
@@ -184,18 +275,22 @@
                                                                 </p>
                                                             </div>
                                                             <div class="row buttons">
-                                                                <a href="#" class="btn btn-warning col-6"><i class="bi bi-cart-plus"></i></a>
-                                                                <a href="#" class="btn btn-danger col-6"><i class="bi bi-trash-fill"></i></a>
+                                                                <a href="#" class="btn col-6"><i
+                                                                        class="bi bi-cart-plus"></i></a>
+                                                                <a href="#" class="btn btn-danger col-6"><i
+                                                                        class="bi bi-trash-fill"></i></a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <div class="card">
-                                                        <img class="img-fluid" alt="100%x280" src="assets/lonchera.webp">
+                                                        <img class="img-fluid" alt="100%x280"
+                                                            src="assets/lonchera.webp">
                                                         <div class="card-body">
                                                             <h5 class="card-title"><a href="#"
-                                                                    class="text-reset stretched-link">Lonchera térmica</a></h5>
+                                                                    class="text-reset stretched-link">Lonchera
+                                                                    térmica</a></h5>
                                                             <div class="row my-4">
                                                                 <h5 class="col-6" style="color: #FF7C48;">$299</h5>
                                                                 <p class="card-text col-6">
@@ -207,12 +302,22 @@
                                                                 </p>
                                                             </div>
                                                             <div class="row buttons">
-                                                                <a href="#" class="btn btn-warning col-6"><i class="bi bi-cart-plus"></i></a>
-                                                                <a href="#" class="btn btn-danger col-6"><i class="bi bi-trash-fill"></i></a>
+                                                                <a href="#" class="btn col-6"><i
+                                                                        class="bi bi-cart-plus"></i></a>
+                                                                <a href="#" class="btn btn-danger col-6"><i
+                                                                        class="bi bi-trash-fill"></i></a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="row">
+                                                <a href="#" data-bs-toggle="modal"
+                                                data-bs-target="#editarLista" class="btn col-6" style="background-color: #FF7C48;
+                                                color: white;"><i
+                                                        class="bi bi-pencil-fill"></i></a>
+                                                <a href="#" class="btn btn-danger col-6"><i
+                                                        class="bi bi-trash-fill"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -225,7 +330,7 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         Productos publicados
-                        <button type="button" class="btn btn-light btn-sm"><i class="bi bi-plus-circle"></i></button>
+                        <button type="button" onclick="location.href='crearProducto.html'" class="btn btn-light btn-sm"><i class="bi bi-plus-circle"></i></button>
                     </div>
                     <div class="card-body">
 
@@ -248,8 +353,10 @@
                                                 </p>
                                             </div>
                                             <div class="row buttons">
-                                                <a href="#" class="btn btn-warning col-6"><i class="bi bi-pencil-fill"></i></a>
-                                                <a href="#" class="btn btn-danger col-6"><i class="bi bi-trash-fill"></i></a>
+                                                <a href="#" class="btn btn-warning col-6"><i
+                                                        class="bi bi-pencil-fill"></i></a>
+                                                <a href="#" class="btn btn-danger col-6"><i
+                                                        class="bi bi-trash-fill"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -271,8 +378,10 @@
                                                 </p>
                                             </div>
                                             <div class="row buttons">
-                                                <a href="#" class="btn btn-warning col-6"><i class="bi bi-pencil-fill"></i></a>
-                                                <a href="#" class="btn btn-danger col-6"><i class="bi bi-trash-fill"></i></a>
+                                                <a href="#" class="btn btn-warning col-6"><i
+                                                        class="bi bi-pencil-fill"></i></a>
+                                                <a href="#" class="btn btn-danger col-6"><i
+                                                        class="bi bi-trash-fill"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -296,8 +405,10 @@
                                                 </p>
                                             </div>
                                             <div class="row buttons">
-                                                <a href="#" class="btn btn-warning col-6"><i class="bi bi-pencil-fill"></i></a>
-                                                <a href="#" class="btn btn-danger col-6"><i class="bi bi-trash-fill"></i></a>
+                                                <a href="#" class="btn btn-warning col-6"><i
+                                                        class="bi bi-pencil-fill"></i></a>
+                                                <a href="#" class="btn btn-danger col-6"><i
+                                                        class="bi bi-trash-fill"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -319,8 +430,10 @@
                                                 </p>
                                             </div>
                                             <div class="row buttons">
-                                                <a href="#" class="btn btn-warning col-6"><i class="bi bi-pencil-fill"></i></a>
-                                                <a href="#" class="btn btn-danger col-6"><i class="bi bi-trash-fill"></i></a>
+                                                <a href="#" class="btn btn-warning col-6"><i
+                                                        class="bi bi-pencil-fill"></i></a>
+                                                <a href="#" class="btn btn-danger col-6"><i
+                                                        class="bi bi-trash-fill"></i></a>
                                             </div>
                                         </div>
                                     </div>

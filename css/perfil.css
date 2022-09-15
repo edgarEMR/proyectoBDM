@@ -86,3 +86,18 @@
     background-color: #FF7C48;
     color: white;
 }
+
+/*PARA MODAL*/
+.modal-title {
+    color: #FF7C48;
+}
+
+.modal-body {
+    color: #474F54;
+}
+
+.modal-body button{
+    background-color: #FF415B;
+    color: white;
+}
+/**/

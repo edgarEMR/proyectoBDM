@@ -1,0 +1,53 @@
+.card{
+    border:none
+}
+
+.product{
+    background-color: #eee
+}
+
+.brand{
+    font-size: 13px
+}
+
+.act-price{
+    color: #FF7C48;
+    font-weight: 700;
+}
+
+.about{
+    font-size: 14px
+}
+
+.cart a{
+    background-color: #FF415B;
+    color: white;
+}
+
+.comentarios {
+    overflow-y: auto;
+    height: 300px;
+}
+
+.comentarios .card-footer{
+    background-color: white;
+    color: #FF415B;
+}
+
+.boxComentario button{
+    background-color: #FF415B;
+}
+
+.recomendados .carousel-item .card{
+    color: #474F54;
+}
+
+.recomendados .carousel-item .card img{
+    height: 150px;
+    object-fit: contain;
+}
+
+.recomendados .carousel-item .card .buttons a{
+    background-color: #FF415B;
+    color: white;
+}
