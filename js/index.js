@@ -19,7 +19,7 @@
 
 $(document).ready(function(){
   console.log('Listo');
-  $("#LoginForm").submit(function(event) {
+  $("#registroUsuario").submit(function(event) {
     event.preventDefault();
 
     console.log('Entro');

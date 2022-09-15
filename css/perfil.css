@@ -1,0 +1,88 @@
+.container{
+    padding-bottom: 25px;
+}
+
+.container h1 {
+    text-align: center;
+    color: #FF415B;
+    padding-top: 10px;
+}
+
+#idEditar {
+    background-color: #FF7C48;
+    color: white;
+}
+
+.container .personal-data {
+    background-color: white;
+    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,.2);
+    box-shadow: 0px 14px 0 5px rgba(44,44,44,.4);
+    width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+.personal-data .buttons{
+    display: flex;
+    justify-content: space-between;
+}
+
+.personal-data #imgPrev{
+    width: 150px;
+    height: 150px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+}
+
+.personal-data #nombreUsuario{
+    text-align: center;
+    padding-top: 15px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group i{
+    position: absolute;
+    margin-top: -30px;
+    margin-left: 210px;
+    cursor: pointer;
+}
+
+#idGuardar {
+    background-color: #FF415B;
+    color: white;
+}
+
+.contenido.col-6{
+    margin-top: 100px;
+}
+
+.contenido .card-header{
+    background-color: #FF415B;
+    color: white;
+}
+
+.contenido > .card > .card-body{
+    overflow-y: auto;
+    height: 300px;
+}
+
+.productos-publicados .card img{
+    height: 150px;
+    object-fit: contain;
+}
+
+.listas .card .buttons a:nth-child(1){
+    background-color: #FF415B;
+    color: white;
+}
+
+.productos-publicados .card .buttons a:nth-child(1){
+    background-color: #FF7C48;
+    color: white;
+}
