@@ -54,7 +54,7 @@ body {
 .form-group #verIcon {
     position: absolute;
     margin-top: -30px;
-    margin-left: 380px;
+    margin-left: 360px;
     cursor: pointer;
 }
 
@@ -120,6 +120,6 @@ body {
 #registroUsuario .form-group i{
     position: absolute;
     margin-top: -30px;
-    margin-left: 260px;
+    margin-left: 250px;
     cursor: pointer;
 }

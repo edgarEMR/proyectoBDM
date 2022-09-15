@@ -1,0 +1,39 @@
+.mas-vendidos {
+    padding-top: 1%;
+}
+
+.mas-vendidos .card {
+    border-width: 10px;
+}
+
+.mas-vendidos .card-title {
+    color: #FF7C48;
+}
+
+#top1 > img{
+    height: 420px;
+    object-fit: contain;
+}
+
+#top2 > img, #top3 > img{
+    height: 150px;
+    object-fit: contain;
+}
+
+.recomendados {
+    margin-top: 3%;
+}
+
+.recomendados .carousel-item .card{
+    color: #474F54;
+}
+
+.recomendados .carousel-item .card img{
+    height: 150px;
+    object-fit: contain;
+}
+
+.recomendados .carousel-item .card .buttons a{
+    background-color: #FF415B;
+    color: white;
+}

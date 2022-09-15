@@ -17,6 +17,24 @@
   })
 })()
 
+$(document).ready(function(){
+  console.log('Listo');
+  $("#LoginForm").submit(function(event) {
+    event.preventDefault();
+
+    console.log('Entro');
+    
+    const toast = new bootstrap.Toast($('#liveToast'));
+    toast.show();
+
+    setTimeout(function () {
+        window.location.href = "inicio.html";
+        window.clearTimeout(tID);		// clear time out.
+    }, 5000);
+    
+  });
+});
+
 function verContra() {
   var contra = document.getElementById("contraseña");
   

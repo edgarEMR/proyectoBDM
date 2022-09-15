@@ -1,0 +1,53 @@
+nav {
+    background-color: #FF7C48;
+}
+
+.navbar-brand {
+    width: 10%;
+}
+
+.navbar-brand > img {
+    width: 70%;
+}
+
+#busqueda {
+    width: 40%;
+}
+
+.derecha {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.userInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 15px;
+    color: white;
+}
+
+.userInfo img{
+    width: 37.8px;
+    height: 37.8px;
+}
+
+.userInfo .username{
+    display: flex;
+    justify-content: center;
+}
+
+#shoppingCartBtn {
+    display: flex;
+    font-size: 20pt;
+    color: white;
+    border-color: white;
+    justify-content: center;
+}
+
+.categorias {
+    background-color: #474F54;
+    width: 100%;
+    color: white;
+}

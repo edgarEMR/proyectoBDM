@@ -29,16 +29,26 @@
                         <h4 class="modal-title">Entrar</h4>
                     </div>
                     <div class="modal-body">
-                        <form id="LoginForm" action="login.php" method="POST">
+                        <form id="LoginForm" action="inicio.html" class="row needs-validation" novalidate>
                             <div class="form-group mb-4">
-                                <label for="nombreUsuario" class="text-dark">Nombre de usuario</label>
-                                <input type="text" name="nombreUsuario" class="form-control" id="nombreUsuario" placeholder="Nombre de usuario" required>
+                                <label for="nombreUsuario" class="text-dark">Nombre de usuario/Correo</label>
+                                <input type="text" name="nombreUsuario" class="form-control" id="nombreUsuario" required>
+                                <div class="invalid-feedback">
+                                    Ingrese su nombre de usuario o correo.
+                                </div>
                             </div>
-                            <div class="form-group mb-4">
+                            <div class="form-group mb-2">
                                 <label for="contraseña" class="text-dark">Contraseña</label>
-                                <input type="password" name="contraseña" class="form-control" id="contraseña" placeholder="Contraseña" required>
+                                <input type="password" name="contraseña" class="form-control" id="contraseña" required>
                                 <i id="verIcon" class="bi bi-eye-slash-fill" onclick="verContra()"></i>
+                                <div class="invalid-feedback">
+                                    Ingrese su contraseña.
+                                </div>
                             </div>
+                            <div class="form-check form-check-reverse form-switch mb-4">
+                                <input class="form-check-input" type="checkbox" role="switch" id="inputRecordar">
+                                <label class="form-check-label" for="inputRecordar">Recordar</label>
+                            </div>                            
                             <div class="form-group d-grid mb-5">
                                 <input type="hidden" name="accion" value="login" />
                                 <button type="submit" class="btn btn-block">Entrar</button>
@@ -55,9 +65,20 @@
         </div>
     </div>
     <div id="registro" class="registro">
+        <div class="toast-container position-relative top-0 start-50 translate-middle-x p-3">
+            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+              <div class="toast-header">
+                <strong class="me-auto">TotalShop</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+              <div class="toast-body">
+                Usuario registrado exitosamente.
+              </div>
+            </div>
+        </div>
         <h1>Crea una cuenta</h1>
         <div class="register-form">
-            <form id="registroUsuario" class="row needs-validation" action="php/UsuarioProcesos.php" method="POST" enctype="multipart/form-data" novalidate>
+            <form id="registroUsuario" class="row needs-validation" enctype="multipart/form-data" novalidate>
                 <div class="form-group">
                     <label for="inputNombreUsu">Nombre de usuario</label>
                     <input type="text" name="nombreUsu" class="form-control" id="inputNombreUsu"
@@ -140,11 +161,12 @@
                 <div class="form-group d-grid">
                     <input type="hidden" name="idRol" value="">
                     <input type="hidden" name="accion" value="registrar">
-                    <button class="btn btn-block" type="submit">Registrarse</button>
+                    <button class="btn btn-block" type="submit" onclick="location.href='inicio.html'">Registrarse</button>
                 </div>
             </form>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/index.js"></script>
 </body>
 </html>
