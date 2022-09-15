@@ -87,6 +87,16 @@
     color: white;
 }
 
+.consultas .card-header{
+    background-color: #FF415B;
+    color: white;
+}
+
+.consultas > .card > .card-body{
+    overflow-y: auto;
+    height: 300px;
+}
+
 /*PARA MODAL*/
 .modal-title {
     color: #FF7C48;

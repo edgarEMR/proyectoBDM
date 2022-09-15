@@ -51,3 +51,126 @@ nav {
     width: 100%;
     color: white;
 }
+
+.offcanvas-body .card{
+    color: #474F54;
+}
+
+.offcanvas-body .card img{
+    height: 75px;
+    object-fit: contain;
+}
+
+.offcanvas-body #pagar{
+    background-color: #FF415B;
+    color: white;
+}
+
+#myform {
+    text-align: center;
+    padding: 5px;
+    border: 1px dotted #ccc;
+    margin: 2%;
+}
+.qty {
+    width: 40px;
+    height: 25px;
+    text-align: center;
+}
+
+.chat-btn {
+    position: absolute;
+    right: 14px;
+    bottom: 30px;
+    cursor: pointer
+}
+
+.chat-btn .close {
+    display: none
+}
+
+.chat-btn i {
+    transition: all 0.9s ease
+}
+
+#check:checked~.chat-btn i {
+    display: block;
+    pointer-events: auto;
+    transform: rotate(180deg)
+}
+
+#check:checked~.chat-btn .comment {
+    display: none
+}
+
+.chat-btn i {
+    font-size: 22px;
+    color: #fff !important
+}
+
+.chat-btn {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    background-color: #FF7C48;
+    color: #fff;
+    font-size: 22px;
+    border: none
+}
+
+.wrapper {
+    position: absolute;
+    right: 20px;
+    bottom: 100px;
+    width: 300px;
+    background-color: #fff;
+    border-radius: 5px;
+    opacity: 0;
+    transition: all 0.4s;
+    z-index: 5;
+}
+
+#check:checked~.wrapper {
+    opacity: 1
+}
+
+.header {
+    padding: 13px;
+    background-color: #474F54;
+    border-radius: 5px 5px 0px 0px;
+    margin-bottom: 10px;
+    color: #fff
+}
+
+.chat-form {
+    padding: 15px
+}
+
+.chat-form button {
+    margin-bottom: 10px;
+    background-color: #FF415B;
+    color: white;
+}
+
+.chat-form textarea {
+    resize: none
+}
+
+.form-control:focus,
+.btn:focus {
+    box-shadow: none
+}
+
+.btn,
+.btn:focus,
+.btn:hover {
+    background-color: blue;
+    border: blue
+}
+
+#check {
+    display: none !important
+}
