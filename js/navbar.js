@@ -33,5 +33,11 @@ $(document).ready(function(){
             $('input[name='+fieldName+']').val(0);
         }
     });
+
+    $("#salir").click(function () {
+
+        window.location.href = "index.php";
+         
+    });
 });
 

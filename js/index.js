@@ -19,20 +19,18 @@
 
 $(document).ready(function(){
   console.log('Listo');
-  $("#registroUsuario").submit(function(event) {
-    event.preventDefault();
 
-    console.log('Entro');
-    
+  if (getParameterByName('error') == 1) {
+    $('#liveToast > .toast-body').text("Usuario o contraseña incorrectos. Verifique su información.")
     const toast = new bootstrap.Toast($('#liveToast'));
     toast.show();
+  }
 
-    setTimeout(function () {
-        window.location.href = "inicio.html";
-        window.clearTimeout(tID);		// clear time out.
-    }, 5000);
-    
-  });
+  if (getParameterByName('error') == 2) {
+    $('#liveToast > .toast-body').text("No se ha podido completar el registro. Vuelva a intentarlo.")
+    const toast = new bootstrap.Toast($('#liveToast'));
+    toast.show();
+  }
 });
 
 function verContra() {
@@ -96,4 +94,13 @@ function readFile() {
     FR.readAsDataURL( this.files[0] );
   }
   
+}
+
+function getParameterByName(name, url = window.location.search) {
+  name = name.replace(/[\[\]]/g, '\\$&');
+  var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+      results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }

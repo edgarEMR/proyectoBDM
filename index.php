@@ -1,3 +1,15 @@
+<?php
+
+    session_start();
+    
+    include_once('php/conection.php');
+    include_once('modelos/Usuario.php');
+
+    $usuario = new Usuario();
+    $coneccion = new DB();
+    $nombreUsuario;
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +41,7 @@
                         <h4 class="modal-title">Entrar</h4>
                     </div>
                     <div class="modal-body">
-                        <form id="LoginForm" action="inicio.html" class="row needs-validation" novalidate>
+                        <form id="LoginForm" action="php/UsuarioProcesos.php" method="POST" class="row needs-validation" novalidate>
                             <div class="form-group mb-4">
                                 <label for="nombreUsuario" class="text-dark">Nombre de usuario/Correo</label>
                                 <input type="text" name="nombreUsuario" class="form-control" id="nombreUsuario" required>
@@ -65,7 +77,7 @@
         </div>
     </div>
     <div id="registro" class="registro">
-        <div class="toast-container position-relative top-0 start-50 translate-middle-x p-3">
+        <div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3">
             <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
               <div class="toast-header">
                 <strong class="me-auto">TotalShop</strong>
@@ -78,7 +90,7 @@
         </div>
         <h1>Crea una cuenta</h1>
         <div class="register-form">
-            <form id="registroUsuario" class="row needs-validation" enctype="multipart/form-data" novalidate>
+            <form id="registroUsuario" action="php/UsuarioProcesos.php" class="row needs-validation" method="POST" enctype="multipart/form-data" novalidate>
                 <div class="form-group">
                     <label for="inputNombreUsu">Nombre de usuario</label>
                     <input type="text" name="nombreUsu" class="form-control" id="inputNombreUsu"
@@ -135,10 +147,10 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label for="inputSexo">Sexo</label>
-                    <select class="form-select" id="inputSexo" required>
+                    <select class="form-select" id="inputSexo" name="sexo" required>
                         <option selected disabled value="">Elige...</option>
-                        <option>Femenino</option>
-                        <option>Masculino</option>
+                        <option value="F">Femenino</option>
+                        <option value="M">Masculino</option>
                       </select>
                     <div class="invalid-feedback">
                         Elija una opción.
@@ -159,11 +171,28 @@
                     <input type="text" name="imagenN" class="form-control" id="inputImagenN">
                 </div>
                 <div class="form-group d-grid">
-                    <input type="hidden" name="idRol" value="">
+                    <input type="hidden" name="idRol" value="2">
                     <input type="hidden" name="accion" value="registrar">
-                    <button class="btn btn-block" type="submit" onclick="location.href='inicio.html'">Registrarse</button>
+                    <button class="btn btn-block" type="submit">Registrarse</button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- Mensaje Modal -->
+    <div class="modal fade" id="modalMensaje" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Atencion</h5>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

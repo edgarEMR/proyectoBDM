@@ -1,3 +1,77 @@
+<?php
+    session_start();
+
+    include_once('php/conection.php');
+    include_once('modelos/Usuario.php');
+    
+    $usuario = new Usuario();
+    $coneccion = new DB();
+    
+    if(isset($_POST['nombreUsuario'])) {
+        $procedure = $coneccion->gestionUsuario($_POST['nombreUsuario'], '', '', '', '', '', '', '', 0, 0, 'S');
+    
+        if ($procedure) {
+    
+            while ($row = $procedure->fetch(PDO::FETCH_ASSOC)) {
+    
+                $usuario->setNombreUsuario($row['nombreUsuario']);
+                $usuario->setContraseña($row['contraseña']);
+                $usuario->setNombre($row['nombre']);
+                $usuario->setApellidos($row['apellidos']);
+                $usuario->setFechaNacimiento($row['fechaNacimiento']);
+                $usuario->setEmail($row['email']);
+                $usuario->setSexo($row['sexo']);
+                $usuario->setImagen(base64_encode($row['imagen']));
+                $usuario->setIdRol($row['idRol']);
+    
+                // nombreUsuario, contraseña, nombre, apellidos, fechaNacimiento, email, sexo, imagen, idRol
+    
+            }
+
+            $_SESSION['nombreUsuario'] = $usuario->getNombreUsuario();
+            $_SESSION['imagen'] = $usuario->getImagen();
+        }
+
+    } else {
+        session_destroy();
+        header('Location: index.php');
+    }
+    
+    if (isset($_SESSION['nombreUsuario'])) {
+        $usuario->setNombreUsuario($_SESSION['nombreUsuario']);
+        $usuario->setImagen($_SESSION['imagen']);
+    
+        echo '<input type="text" id="sessionNombre" style="display: none;" value="'.$_SESSION['nombreUsuario'].'">';
+        echo '<input type="text" id="sessionImagen" style="display: none;" value="'.$_SESSION['imagen'].'">';
+    ?>
+        <script type="text/javascript">
+    
+            document.addEventListener("DOMContentLoaded", function() {
+                document.getElementById('entrar').style.display = 'none';
+                document.getElementById('salir').style.display = 'inline-block';
+            });
+        </script>
+    <?php
+    
+    } else {
+        $usuario->setNombreUsuario('Invitado');
+        $path = 'assets\stock-user-image.png';
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data = file_get_contents($path);
+        $usuario->setImagen(base64_encode($data));
+    ?>
+        <script type="text/javascript">
+            document.addEventListener("DOMContentLoaded", function() {
+                document.getElementById('entrar').style.display = 'inline-block';
+                document.getElementById('salir').style.display = 'none';
+                document.getElementById('userName').textContent = 'Invitado';
+            });
+        </script>
+    <?php
+    
+    }
+    
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

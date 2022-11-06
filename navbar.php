@@ -1,3 +1,19 @@
+<?php
+    session_start();
+
+    include_once('php/conection.php');
+    include_once('modelos/Usuario.php');
+
+    $usuario = new Usuario();
+    $connection = new DB();
+
+    if (isset($_SESSION['nombreUsuario'])) {
+        $usuario->setNombreUsuario($_SESSION['nombreUsuario']);
+        $usuario->setImagen(base64_encode($_SESSION['imagen']));
+    } else {
+        echo 'Nola sesion';
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,7 +37,7 @@
 <body>
     <nav class="navbar pb-0">
         <div class="container-fluid">
-            <a class="navbar-brand" href="inicio.html">
+            <a class="navbar-brand" href="inicio.php">
                 <img src="assets/totalshop-logo-shadow.png" alt="">
             </a>
             <div id="busqueda" class="input-group">
@@ -57,11 +73,12 @@
             </div>
             <div class="derecha">
                 <div class="userInfo">
-                    <a href="perfil.html"><img src="assets/stock-user-image.png" class="userImage" alt="..."
+                    <a href="perfil.php"><img src="<?php echo $usuario->getImagenUri(); ?>" class="userImage" alt="..."
                             id="imgUser"></a>
                     <div class="userName">
-                        <h6 id="userName" class="mt-0">Usuario</h6>
+                        <h6 id="userName" class="mt-0"><?php echo $usuario->getNombreUsuario(); ?></h6>
                     </div>
+                    <button class="btn btn-outline-light my-2 my-sm-0 btn-sm" type="button" id="salir" onclick="<?php session_destroy(); ?>">Cerrar sesión</button>
                 </div>
                 <button id="shoppingCartBtn" class="btn" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">

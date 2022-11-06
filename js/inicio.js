@@ -1,1 +1,1 @@
-$('#navigation').load("navbar.html");
+$('#navigation').load("navbar.php");

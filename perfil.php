@@ -1,3 +1,31 @@
+<?php
+    echo session_start()? 'Se inicio' : 'No inicio';
+
+    include_once('php/conection.php');
+    include_once('modelos/Usuario.php');
+
+    $usuario = new Usuario();
+    $connection = new DB();
+
+    if (isset($_SESSION['nombreUsuario'])) {
+        
+        $procedure = $connection->gestionUsuario($_SESSION['nombreUsuario'], '', '', '', '', '', '', '', 0, 0, 'S');
+
+        while ($row = $procedure->fetch(PDO::FETCH_ASSOC)) {
+            $usuario->setNombreUsuario($row['nombreUsuario']);
+            $usuario->setEmail($row['email']);
+            $usuario->setContraseña($row['contraseña']);
+            $usuario->setNombre($row['nombre']);
+            $usuario->setApellidos($row['apellidos']);
+            $usuario->setFechaNacimiento($row['fechaNacimiento']);
+            $usuario->setSexo($row['sexo']);
+            $usuario->setImagen(base64_encode($row['imagen']));
+            $usuario->setIdRol($row['idRol']);
+        }
+    } else {
+        echo 'Nola sesion';
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,7 +79,7 @@
 
                     <form id="editarUsuario" class="row needs-validation" enctype="multipart/form-data" novalidate>
                         <div class="form-group">
-                            <img id="imgPrev" src="assets/stock-user-image.png" alt="">
+                            <img id="imgPrev" src="<?php echo $usuario->getImagenUri();?>" alt="">
                             <div id="fileDiv" class="custom-file">
                                 <input type="file" name="imagen" class="form-control" id="customFileLangHTML"
                                     accept="image/jpeg, image/png">
@@ -59,20 +87,20 @@
                                     Elija una imagen.
                                 </div>
                             </div>
-                            <h3 id="nombreUsuario">Nombre de usuario</h3>
+                            <h3 id="nombreUsuario"><?php echo $usuario->getNombreUsuario();?></h3>
                         </div>
                         <div class="form-group" hidden>
                             <input type="text" name="imagenN" class="form-control" id="inputImagenN">
                         </div>
                         <div class="form-group" hidden>
                             <input type="text" name="nombreUsu" class="form-control" id="inputNombreUsu"
-                                pattern="[A-Za-z0-9À-ÿ\u00f1\u00d1]{3,}" required>
+                                pattern="[A-Za-z0-9À-ÿ\u00f1\u00d1]{3,}" required value="<?php echo $usuario->getNombreUsuario();?>">
                         </div>
                         <hr>
                         <div class="form-group col-6">
                             <label for="inputNombre">Nombre(s)</label>
                             <input type="text" name="nombre" class="form-control" id="inputNombre"
-                                pattern="[A-Za-zÀ-ÿ\u00f1\u00d1 ]{3,}" required>
+                                pattern="[A-Za-zÀ-ÿ\u00f1\u00d1 ]{3,}" required value="<?php echo $usuario->getNombre();?>">
                             <small id="nombreHelp" class="form-text text-muted">Mínimo 3 caracteres.</small>
                             <div class="invalid-feedback">
                                 Ingrese su nombre.
@@ -81,7 +109,7 @@
                         <div class="form-group col-6">
                             <label for="apellidos">Apellidos</label>
                             <input type="text" name="apellido" class="form-control" id="inputApellidos"
-                                pattern="[A-Za-zÀ-ÿ\u00f1\u00d1 ]{3,}" required>
+                                pattern="[A-Za-zÀ-ÿ\u00f1\u00d1 ]{3,}" required value="<?php echo $usuario->getApellidos();?>">
                             <small id="nombreHelp" class="form-text text-muted">Mínimo 3 caracteres.</small>
                             <div class="invalid-feedback">
                                 Ingrese su apellido.
@@ -91,7 +119,7 @@
                             <label for="inputEmail">Email</label>
                             <input type="email" name="email" class="form-control" id="inputEmail"
                                 pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}$" placeholder="nombre@ejemplo.com"
-                                required>
+                                required value="<?php echo $usuario->getEmail();?>">
                             <div class="invalid-feedback">
                                 Ingrese un correo válido.
                             </div>
@@ -100,7 +128,7 @@
                         <div class="form-group col-md-6">
                             <label for="inputContraseña">Contraseña</label>
                             <input type="password" name="contra" class="form-control" id="inputContraseña"
-                                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&]).{8,}" required>
+                                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&]).{8,}" required value="<?php echo $usuario->getContraseña();?>">
                             <i id="verIconR" class="bi bi-eye-slash-fill" onclick="verContra()"></i>
                             <small id="contraseñaHelp" class="form-text text-muted">Mínimo 8 caracteres, una
                                 mayúscula, un número y un signo de puntuación.</small>
@@ -110,7 +138,7 @@
                         </div>
                         <div class="form-group col-md-8">
                             <label for="inputFecha">Fecha de nacimiento</label>
-                            <input type="date" name="fecha" class="form-control" id="inputFecha" required>
+                            <input type="date" name="fecha" class="form-control" id="inputFecha" required value="<?php echo $usuario->getFechaNacimiento();?>">
                             <div class="invalid-feedback">
                                 Ingrese su fecha de nacimiento.
                             </div>
@@ -119,15 +147,23 @@
                             <label for="inputSexo">Sexo</label>
                             <select class="form-select" id="inputSexo" required>
                                 <option selected disabled value="">Elige...</option>
-                                <option>Femenino</option>
-                                <option>Masculino</option>
+                                <?php if ($usuario->getSexo() == 'F') {
+                                    echo '<option value="F" selected>Femenino</option>';
+                                    echo '<option value="M">Masculino</option>';
+                                } else {
+                                    echo '<option value="F">Femenino</option>';
+                                    echo '<option value="M" selected>Masculino</option>';
+                                } 
+                                ?>
+                                
                             </select>
                             <div class="invalid-feedback">
                                 Elija una opción.
                             </div>
                         </div>
                         <div class="form-group d-grid mt-4">
-                            <input type="hidden" name="accion" value="guardar">
+                            <input type="hidden" name="idRol" value="<?php echo $usuario->getIdRol();?>">
+                            <input type="hidden" name="accion" value="editar">
                             <button id="idGuardar" class="btn btn-block" type="submit">Guardar</button>
                         </div>
                     </form>
