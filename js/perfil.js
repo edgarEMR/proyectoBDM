@@ -22,6 +22,7 @@ $('#navigation').load("navbar.php");
   $(document).ready(function(){
     console.log('Listo');
     desactivarCampos();
+
     $("#editarUsuario").submit(function(event) {
       event.preventDefault();
   
@@ -29,9 +30,30 @@ $('#navigation').load("navbar.php");
       
       const toast = new bootstrap.Toast($('#liveToast'));
       toast.show();
-  
       
     });
+
+    var idRol = document.getElementsByName("idRol")[0].value;
+    
+    if(idRol == 1){
+      $("#consultas").toggle();
+      $("#listas").toggle();
+      $("#productos").toggle();
+      $("#prod-autorizados").toggle();
+      $("#prod-pendientes").toggle();
+
+    } else if(idRol == 2){
+      $("#consultas").toggle();
+      $("#listas").toggle();
+      $("#productos").toggle();
+      $("#admins").toggle();
+
+    } else {
+      $("#admins").toggle();
+      $("#prod-autorizados").toggle();
+      $("#prod-pendientes").toggle();
+    }
+
   });
   
   function verContra() {
@@ -118,3 +140,12 @@ function editar()
     }
     
   }
+
+function getParameterByName(name, url = window.location.search) {
+  name = name.replace(/[\[\]]/g, '\\$&');
+  var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+      results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}

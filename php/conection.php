@@ -2,7 +2,7 @@
     class DB
     {
         private $host = 'localhost';
-        private $db = 'totalShopBDM';
+        private $db = 'proyectobdm';
         private $user = 'root';
         private $password = ''; //[dC5+vri(YmUO+z9
         private $charset = 'utf8mb4';
@@ -32,7 +32,7 @@
         function gestionUsuario($nombreUsuario, $contraseña, $nombre, $apellidos, $fechaNacimiento, 
                                 $email, $sexo, $imagen, $esPublico, $rol, $opcion)
         {
-            if($opcion == 'S'){
+            if($opcion == 'S' || $opcion == 'A'){
                 return $this->connect()->query("CALL spGestionUsuario('$nombreUsuario', '$email', '$contraseña', '$nombre', '$apellidos', 
                                                                     '$fechaNacimiento', '$sexo', '$imagen', $esPublico, $rol, '$opcion')");
             } else {

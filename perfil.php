@@ -1,5 +1,5 @@
 <?php
-    echo session_start()? 'Se inicio' : 'No inicio';
+echo session_start()? 'Se inicio' : 'No inicio';
 
     include_once('php/conection.php');
     include_once('modelos/Usuario.php');
@@ -7,24 +7,26 @@
     $usuario = new Usuario();
     $connection = new DB();
 
-    if (isset($_SESSION['nombreUsuario'])) {
-        
-        $procedure = $connection->gestionUsuario($_SESSION['nombreUsuario'], '', '', '', '', '', '', '', 0, 0, 'S');
-
-        while ($row = $procedure->fetch(PDO::FETCH_ASSOC)) {
-            $usuario->setNombreUsuario($row['nombreUsuario']);
-            $usuario->setEmail($row['email']);
-            $usuario->setContraseña($row['contraseña']);
-            $usuario->setNombre($row['nombre']);
-            $usuario->setApellidos($row['apellidos']);
-            $usuario->setFechaNacimiento($row['fechaNacimiento']);
-            $usuario->setSexo($row['sexo']);
-            $usuario->setImagen(base64_encode($row['imagen']));
-            $usuario->setIdRol($row['idRol']);
-        }
-    } else {
-        echo 'Nola sesion';
+    if (!isset($_SESSION['nombreUsuario'])) {
+        $_SESSION['nombreUsuario'] = $_GET['nombreUsuario'];
     }
+
+    $procedure = $connection->gestionUsuario($_SESSION['nombreUsuario'], '', '', '', '', '', '', '', 0, 0, 'S');
+
+    while ($row = $procedure->fetch(PDO::FETCH_ASSOC)) {
+        $usuario->setNombreUsuario($row['nombreUsuario']);
+        $usuario->setEmail($row['email']);
+        $usuario->setContraseña($row['contraseña']);
+        $usuario->setNombre($row['nombre']);
+        $usuario->setApellidos($row['apellidos']);
+        $usuario->setFechaNacimiento($row['fechaNacimiento']);
+        $usuario->setSexo($row['sexo']);
+        $usuario->setImagen(base64_encode($row['imagen']));
+        $usuario->setIdRol($row['idRol']);
+
+        $_SESSION['imagen'] = $row['imagen'];
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -170,7 +172,7 @@
                 </div>
             </div>
             <div class="contenido col-6 d-grid gap-3">
-                <div class="card">
+                <div id="listas" class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         Mis listas
                         <button type="button" class="btn btn-light btn-sm" data-bs-toggle="modal"
@@ -363,7 +365,7 @@
                     </div>
                 </div>
 
-                <div class="card">
+                <div id="productos" class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         Productos publicados
                         <button type="button" onclick="location.href='crearProducto.html'" class="btn btn-light btn-sm"><i class="bi bi-plus-circle"></i></button>
@@ -479,14 +481,250 @@
                     </div>
                 </div>
 
+                <div id="admins" class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        Administradores
+                        <button type="button" onclick="location.href='#'" class="btn btn-light btn-sm"><i class="bi bi-plus-circle"></i></button>
+                    </div>
+                    <div class="card-body">
+                        <div class="administradores">
+                            <?php 
+                                $procedure = $connection->gestionUsuario('', '', '', '', '', '', '', '', 0, 2, 'A');
+
+                                while ($row = $procedure->fetch(PDO::FETCH_ASSOC)) {
+                                    $admin = new Usuario();
+                                    $admin->setNombreUsuario($row['nombreUsuario']);
+                                    $admin->setEmail($row['email']);
+                                    $admin->setContraseña($row['contraseña']);
+                                    $admin->setNombre($row['nombre']);
+                                    $admin->setApellidos($row['apellidos']);
+                                    $admin->setFechaNacimiento($row['fechaNacimiento']);
+                                    $admin->setSexo($row['sexo']);
+                                    $admin->setImagen(base64_encode($row['imagen']));
+                                    $admin->setIdRol($row['idRol']);
+  
+                                    echo '<div class="mb-3">';
+                                        echo '<div class="card mb-3">';
+                                            echo '<div class="row g-0">';
+                                                echo '<div class="col-md-4" style="text-align: center;">';
+                                                    echo '<img src="'. $admin->getImagenUri() .'" class="img-fluid rounded-circle" width="60%" alt="...">';
+                                                echo '</div>';
+                                                echo '<div class="col-md-8">';
+                                                    echo '<div class="card-body">';
+                                                        echo '<h5 class="card-title">'. $admin->getNombreUsuario() .'</h5>';
+                                                        echo '<p class="card-text">'. $admin->getNombre() . ' ' . $admin->getApellidos() .'</p>';
+                                                        echo '<p class="card-text"><small class="text-muted">'. $admin->getEmail() .'</small></p>';
+                                                    echo '</div>';
+                                                echo '</div>';
+                                            echo '</div>';
+                                        echo '</div>';
+                                    echo '</div>';
+                                }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="prod-autorizados" class="card">
+                    <div class="card-header">
+                        Pendientes de autorización
+                    </div>
+                    <div class="card-body">
+
+                        <div class="productos-publicados">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="card">
+                                        <img class="img-fluid" alt="100%x280" src="assets/lonchera.webp">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><a href="#"
+                                                    class="text-reset stretched-link">Lonchera térmica</a></h5>
+                                            <div class="row my-4">
+                                                <h5 class="col-6" style="color: #FF7C48;">$299</h5>
+                                                <p class="card-text col-6">
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star"></i>
+                                                    <i class="bi bi-star"></i>
+                                                </p>
+                                            </div>
+                                            <div class="row buttons">
+                                                <a href="#" class="btn btn-warning col-12"><i class="bi bi-check-lg"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="card">
+                                        <img class="img-fluid" alt="100%x280" src="assets/lonchera.webp">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><a href="#"
+                                                    class="text-reset stretched-link">Lonchera térmica</a></h5>
+                                            <div class="row my-4">
+                                                <h5 class="col-6" style="color: #FF7C48;">$299</h5>
+                                                <p class="card-text col-6">
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star"></i>
+                                                    <i class="bi bi-star"></i>
+                                                </p>
+                                            </div>
+                                            <div class="row buttons">
+                                                <a href="#" class="btn btn-warning col-12"><i class="bi bi-check-lg"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="card">
+                                        <img class="img-fluid" alt="100%x280" src="assets/lonchera.webp">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><a href="#"
+                                                    class="text-reset stretched-link">Lonchera térmica</a></h5>
+                                            <div class="row my-4">
+                                                <h5 class="col-6" style="color: #FF7C48;">$299</h5>
+                                                <p class="card-text col-6">
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star"></i>
+                                                    <i class="bi bi-star"></i>
+                                                </p>
+                                            </div>
+                                            <div class="row buttons">
+                                                <a href="#" class="btn btn-warning col-12"><i class="bi bi-check-lg"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="card">
+                                        <img class="img-fluid" alt="100%x280" src="assets/lonchera.webp">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><a href="#"
+                                                    class="text-reset stretched-link">Lonchera térmica</a></h5>
+                                            <div class="row my-4">
+                                                <h5 class="col-6" style="color: #FF7C48;">$299</h5>
+                                                <p class="card-text col-6">
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star"></i>
+                                                    <i class="bi bi-star"></i>
+                                                </p>
+                                            </div>
+                                            <div class="row buttons">
+                                                <a href="#" class="btn btn-warning col-12"><i class="bi bi-check-lg"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="prod-pendientes" class="card">
+                    <div class="card-header">
+                        Productos autorizados
+                    </div>
+                    <div class="card-body">
+
+                        <div class="productos-publicados">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="card">
+                                        <img class="img-fluid" alt="100%x280" src="assets/lonchera.webp">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><a href="#"
+                                                    class="text-reset stretched-link">Lonchera térmica</a></h5>
+                                            <div class="row my-4">
+                                                <h5 class="col-6" style="color: #FF7C48;">$299</h5>
+                                                <p class="card-text col-6">
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star"></i>
+                                                    <i class="bi bi-star"></i>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="card">
+                                        <img class="img-fluid" alt="100%x280" src="assets/lonchera.webp">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><a href="#"
+                                                    class="text-reset stretched-link">Lonchera térmica</a></h5>
+                                            <div class="row my-4">
+                                                <h5 class="col-6" style="color: #FF7C48;">$299</h5>
+                                                <p class="card-text col-6">
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star"></i>
+                                                    <i class="bi bi-star"></i>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="card">
+                                        <img class="img-fluid" alt="100%x280" src="assets/lonchera.webp">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><a href="#"
+                                                    class="text-reset stretched-link">Lonchera térmica</a></h5>
+                                            <div class="row my-4">
+                                                <h5 class="col-6" style="color: #FF7C48;">$299</h5>
+                                                <p class="card-text col-6">
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star"></i>
+                                                    <i class="bi bi-star"></i>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="card">
+                                        <img class="img-fluid" alt="100%x280" src="assets/lonchera.webp">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><a href="#"
+                                                    class="text-reset stretched-link">Lonchera térmica</a></h5>
+                                            <div class="row my-4">
+                                                <h5 class="col-6" style="color: #FF7C48;">$299</h5>
+                                                <p class="card-text col-6">
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star"></i>
+                                                    <i class="bi bi-star"></i>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="row my-5 consultas">
+        <div id="consultas" class="row my-5 consultas">
             <div class="col-6">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         Mis ventas
-                        
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -526,59 +764,55 @@
                             <tr><td>Row:6 Cell:1</td><td>Row:6 Cell:2</td><td>Row:6 Cell:3</td><td>Row:6 Cell:4</td><td>Row:6 Cell:5</td></tr>
                             </table>
                             
-                            
                     </div>
                 </div>
             </div>
             <div class="col-6">
                 <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    Mis compras
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="form-group col-md-4">
-                            <label for="inputFechaI">Desde</label>
-                            <input type="date" name="fechaIni" class="form-control" id="inputFechaI">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="inputFechaF">Hasta</label>
-                            <input type="date" name="fechaFin" class="form-control" id="inputFechaF">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="inputFechaF">Categorias</label>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Todas</option>
-                                <option value="1">Electrónica</option>
-                                <option value="2">Muebles</option>
-                                <option value="3">Juguetes</option>
-                            </select>
-                        </div>
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        Mis compras
                     </div>
-                    
-                    <style type="text/css">
-                        .tftable {font-size:12px;color:#333333;width:100%;border-width: 1px;border-color: #a9a9a9;border-collapse: collapse;}
-                        .tftable th {font-size:12px;background-color:#b8b8b8;border-width: 1px;padding: 8px;border-style: solid;border-color: #a9a9a9;text-align:left;}
-                        .tftable tr {background-color:#ffffff;}
-                        .tftable td {font-size:12px;border-width: 1px;padding: 8px;border-style: solid;border-color: #a9a9a9;}
-                        .tftable tr:hover {background-color:#ffff99;}
-                        </style>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label for="inputFechaI">Desde</label>
+                                <input type="date" name="fechaIni" class="form-control" id="inputFechaI">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputFechaF">Hasta</label>
+                                <input type="date" name="fechaFin" class="form-control" id="inputFechaF">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputFechaF">Categorias</label>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Todas</option>
+                                    <option value="1">Electrónica</option>
+                                    <option value="2">Muebles</option>
+                                    <option value="3">Juguetes</option>
+                                </select>
+                            </div>
+                        </div>
                         
-                        <table class="tftable" border="1">
-                        <tr><th>Header 1</th><th>Header 2</th><th>Header 3</th><th>Header 4</th><th>Header 5</th></tr>
-                        <tr><td>Row:1 Cell:1</td><td>Row:1 Cell:2</td><td>Row:1 Cell:3</td><td>Row:1 Cell:4</td><td>Row:1 Cell:5</td></tr>
-                        <tr><td>Row:2 Cell:1</td><td>Row:2 Cell:2</td><td>Row:2 Cell:3</td><td>Row:2 Cell:4</td><td>Row:2 Cell:5</td></tr>
-                        <tr><td>Row:3 Cell:1</td><td>Row:3 Cell:2</td><td>Row:3 Cell:3</td><td>Row:3 Cell:4</td><td>Row:3 Cell:5</td></tr>
-                        <tr><td>Row:4 Cell:1</td><td>Row:4 Cell:2</td><td>Row:4 Cell:3</td><td>Row:4 Cell:4</td><td>Row:4 Cell:5</td></tr>
-                        <tr><td>Row:5 Cell:1</td><td>Row:5 Cell:2</td><td>Row:5 Cell:3</td><td>Row:5 Cell:4</td><td>Row:5 Cell:5</td></tr>
-                        <tr><td>Row:6 Cell:1</td><td>Row:6 Cell:2</td><td>Row:6 Cell:3</td><td>Row:6 Cell:4</td><td>Row:6 Cell:5</td></tr>
-                        </table>
+                        <style type="text/css">
+                            .tftable {font-size:12px;color:#333333;width:100%;border-width: 1px;border-color: #a9a9a9;border-collapse: collapse;}
+                            .tftable th {font-size:12px;background-color:#b8b8b8;border-width: 1px;padding: 8px;border-style: solid;border-color: #a9a9a9;text-align:left;}
+                            .tftable tr {background-color:#ffffff;}
+                            .tftable td {font-size:12px;border-width: 1px;padding: 8px;border-style: solid;border-color: #a9a9a9;}
+                            .tftable tr:hover {background-color:#ffff99;}
+                            </style>
+                            
+                            <table class="tftable" border="1">
+                            <tr><th>Header 1</th><th>Header 2</th><th>Header 3</th><th>Header 4</th><th>Header 5</th></tr>
+                            <tr><td>Row:1 Cell:1</td><td>Row:1 Cell:2</td><td>Row:1 Cell:3</td><td>Row:1 Cell:4</td><td>Row:1 Cell:5</td></tr>
+                            <tr><td>Row:2 Cell:1</td><td>Row:2 Cell:2</td><td>Row:2 Cell:3</td><td>Row:2 Cell:4</td><td>Row:2 Cell:5</td></tr>
+                            <tr><td>Row:3 Cell:1</td><td>Row:3 Cell:2</td><td>Row:3 Cell:3</td><td>Row:3 Cell:4</td><td>Row:3 Cell:5</td></tr>
+                            <tr><td>Row:4 Cell:1</td><td>Row:4 Cell:2</td><td>Row:4 Cell:3</td><td>Row:4 Cell:4</td><td>Row:4 Cell:5</td></tr>
+                            <tr><td>Row:5 Cell:1</td><td>Row:5 Cell:2</td><td>Row:5 Cell:3</td><td>Row:5 Cell:4</td><td>Row:5 Cell:5</td></tr>
+                            <tr><td>Row:6 Cell:1</td><td>Row:6 Cell:2</td><td>Row:6 Cell:3</td><td>Row:6 Cell:4</td><td>Row:6 Cell:5</td></tr>
+                            </table>
+                    </div>
                 </div>
             </div>
-            </div>
-            
-
-            
         </div>
 
     </div>
